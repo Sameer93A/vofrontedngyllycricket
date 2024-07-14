@@ -1,9 +1,11 @@
+import React from "react";
+
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/yoJWMMPbNnR
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-export default function Component() {
+export default function SummaryScoreboard() {
   return (
     <div className="bg-background rounded-lg border p-6 w-full max-w-4xl">
       <div className="flex flex-col gap-6">
