@@ -4,7 +4,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function SecondScoreboard({
   teamNameFirst,
@@ -15,6 +15,13 @@ export default function SecondScoreboard({
   firstTeamWicket,
   secondTeamWicket,
 }) {
+  const [totalSum, setTotalSum] = useState(0);
+  const [bowCounting, SetBowlCounting] = useState(firstTeamRun);
+
+  useEffect(() => {
+    // Update totalSum whenever firstTeamRun changes
+    setTotalSum((prevTotalSum) => prevTotalSum + firstTeamRun);
+  }, [firstTeamRun, overCounting]);
   return (
     <div className="flex justify-center ">
       <Card className="w-full max-w-2xl">
@@ -36,7 +43,7 @@ export default function SecondScoreboard({
                 {teamNameFirst}
               </div>
               <div className="text-2xl font-bold">
-                {`${firstTeamRun} / ${firstTeamWicket}`}
+                {`${totalSum} / ${firstTeamWicket}`}
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -66,7 +73,7 @@ export default function SecondScoreboard({
                 </div>
               </div>
               <div className="text-sm text-muted-foreground font-bold">
-                78 (45)
+                78 ({overCounting})
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -86,7 +93,7 @@ export default function SecondScoreboard({
                 </div>
               </div>
               <div className="text-sm text-muted-foreground font-bold">
-                8-0-45-2
+                {firstTeamRun}
               </div>
             </div>
           </div>
