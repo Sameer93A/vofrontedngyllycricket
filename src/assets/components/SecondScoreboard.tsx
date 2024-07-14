@@ -6,7 +6,15 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import React from "react";
 
-export default function SecondScoreboard({ teamNameFirst, teamNameSecond }) {
+export default function SecondScoreboard({
+  teamNameFirst,
+  teamNameSecond,
+  overCounting,
+  firstTeamRun,
+  secondTeamRun,
+  firstTeamWicket,
+  secondTeamWicket,
+}) {
   return (
     <div className="flex justify-center ">
       <Card className="w-full max-w-2xl">
@@ -27,11 +35,13 @@ export default function SecondScoreboard({ teamNameFirst, teamNameSecond }) {
               <div className="text-sm text-muted-foreground">
                 {teamNameFirst}
               </div>
-              <div className="text-2xl font-bold">224/5</div>
+              <div className="text-2xl font-bold">
+                {`${firstTeamRun} / ${firstTeamWicket}`}
+              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="text-4xl font-bold">
-                <span className="text-primary">45.2</span>
+                <span className="text-primary">{overCounting}</span>
               </div>
               <div className="text-sm text-muted-foreground">Overs</div>
             </div>
@@ -39,7 +49,9 @@ export default function SecondScoreboard({ teamNameFirst, teamNameSecond }) {
               <div className="text-sm text-muted-foreground">
                 {teamNameSecond}
               </div>
-              <div className="text-2xl font-bold">189/8</div>
+              <div className="text-2xl font-bold">
+                {`${secondTeamRun} / ${secondTeamWicket}`}
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
@@ -53,7 +65,9 @@ export default function SecondScoreboard({ teamNameFirst, teamNameSecond }) {
                   <div className="w-4 h-4 text-muted-foreground" />
                 </div>
               </div>
-              <div className="text-sm text-muted-foreground">78 (45)</div>
+              <div className="text-sm text-muted-foreground font-bold">
+                78 (45)
+              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="text-2xl font-bold">
@@ -71,7 +85,9 @@ export default function SecondScoreboard({ teamNameFirst, teamNameSecond }) {
                   <div className="w-4 h-4 text-muted-foreground" />
                 </div>
               </div>
-              <div className="text-sm text-muted-foreground">8-0-45-2</div>
+              <div className="text-sm text-muted-foreground font-bold">
+                8-0-45-2
+              </div>
             </div>
           </div>
         </CardContent>
