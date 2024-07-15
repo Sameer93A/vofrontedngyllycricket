@@ -1,10 +1,5 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/T3HrChVfeh8
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 export default function SecondScoreboard({
   teamNameFirst,
@@ -16,14 +11,26 @@ export default function SecondScoreboard({
   secondTeamWicket,
 }) {
   const [totalSum, setTotalSum] = useState(0);
-  const [bowCounting, SetBowlCounting] = useState(firstTeamRun);
+  const [bowlCounting, setBowlCounting] = useState([]);
 
   useEffect(() => {
-    // Update totalSum whenever firstTeamRun changes
-    setTotalSum((prevTotalSum) => prevTotalSum + firstTeamRun);
+    if (overCounting > 0) {
+      setBowlCounting((prevBalls) => [...prevBalls, firstTeamRun]);
+    }
   }, [firstTeamRun, overCounting]);
+
+  useEffect(() => {
+    if (overCounting > 0) {
+      setTotalSum((prevTotalSum) => prevTotalSum + firstTeamRun);
+    }
+  }, [firstTeamRun, overCounting]);
+
+  const overs = Math.floor(overCounting / 6);
+  const balls = overCounting % 6;
+  const displayCount = `${overs}.${balls}`;
+
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <Card className="w-full max-w-2xl">
         <CardHeader className="flex items-center justify-between border-b pb-4">
           <div className="flex items-center gap-4">
@@ -48,7 +55,7 @@ export default function SecondScoreboard({
             </div>
             <div className="flex flex-col items-center">
               <div className="text-4xl font-bold">
-                <span className="text-primary">{overCounting}</span>
+                <span className="text-primary">{displayCount}</span>
               </div>
               <div className="text-sm text-muted-foreground">Overs</div>
             </div>
@@ -73,7 +80,7 @@ export default function SecondScoreboard({
                 </div>
               </div>
               <div className="text-sm text-muted-foreground font-bold">
-                78 ({overCounting})
+                {totalSum} ({overCounting})
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -93,7 +100,7 @@ export default function SecondScoreboard({
                 </div>
               </div>
               <div className="text-sm text-muted-foreground font-bold">
-                {firstTeamRun}
+                {bowlCounting.join(" - ")}
               </div>
             </div>
           </div>
